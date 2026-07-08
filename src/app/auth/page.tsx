@@ -1,12 +1,12 @@
 "use client";
 
-import { useAuth } from "@/context/authContext";
+/* import { useAuth } from "@/context/authContext"; */
 import { Eye, EyeOff, Lock, Mail, ShieldCheck } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
 export default function AuthPage() {
-  const { signIn, alert, loading, user } = useAuth();
+  /* const { signIn, alert, loading, user } = useAuth(); */
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -18,11 +18,11 @@ export default function AuthPage() {
   const pageSubtitle =
     "Faça login para acessar sua área administrativa com segurança.";
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (user?._id) {
       router.push(`/dashboard/${user._id}`);
     }
-  }, [user, router]);
+  }, [user, router]); */
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -34,10 +34,10 @@ export default function AuthPage() {
     }
 
     try {
-      await signIn({
+/*       await signIn({
         email: email.trim(),
         password: password.trim(),
-      });
+      }); */
     } catch {
       setLocalError("Não foi possível entrar no sistema.");
     }
@@ -158,7 +158,7 @@ export default function AuthPage() {
                     </div>
                   </div>
 
-                  {(localError ||
+{/*                   {(localError ||
                     alert?.type === "error" ||
                     alert?.type === "success") && (
                     <div
@@ -170,7 +170,7 @@ export default function AuthPage() {
                     >
                       {localError || alert?.message}
                     </div>
-                  )}
+                  )} */}
 
                   <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
                     <label className="flex items-center gap-2 text-sm text-slate-300">
@@ -189,13 +189,13 @@ export default function AuthPage() {
                     </button>
                   </div>
 
-                  <button
+{/*                   <button
                     type="submit"
                     disabled={loading}
                     className="mt-2 flex h-14 w-full items-center justify-center rounded-2xl bg-cyan-400 px-4 text-sm font-black text-slate-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-70"
                   >
                     {loading ? "Entrando..." : "Entrar"}
-                  </button>
+                  </button> */}
                 </div>
               </form>
 
