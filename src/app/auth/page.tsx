@@ -200,7 +200,7 @@ export default function AuthPage() {
               </form>
 
               <div className="mt-5 text-center text-sm text-slate-400 lg:text-left">
-                Acesso restrito ao sistema.
+                Acesso restrito ao sistema
               </div>
             </div>
           </section>
