@@ -1,214 +1,235 @@
 "use client";
 
-import Link from "next/link";
-import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
-import { parseCookies, destroyCookie } from "nookies";
-import { useRouter } from "next/navigation";
-import { Container } from "@/components/ui/container";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Search, User, ShoppingBag, Menu } from "lucide-react";
+import { playfair } from "@/lib/fonts";
 
-import { useMenu } from "@/context/MenuContext";
+interface HeaderProps {
+  onOpenMenu: () => void;
+}
 
-const links = [
-  { href: "/", label: "Início" },
-  { href: "/sobre", label: "Sobre" },
-  { href: "/servicos", label: "Serviços" },
-  { href: "/designs", label: "Designs Web" },
-  { href: "/portfolio", label: "Portfólio" },
-  { href: "/orcamento", label: "Orçamento" },
-  { href: "/agendamento", label: "Agendamento" },
-  { href: "/contato", label: "Contato" },
-];
-
-export function Header() {
-  const { open, setOpen } = useMenu();
-  const [dashboardHref, setDashboardHref] = useState<string | null>(null);
-
-  const router = useRouter();
-
-  useEffect(() => {
-    const closeOnResize = () => {
-      if (window.innerWidth >= 1024) setOpen(false);
-    };
-
-    window.addEventListener("resize", closeOnResize);
-    return () => window.removeEventListener("resize", closeOnResize);
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
-
-  useEffect(() => {
-    const cookies = parseCookies();
-    const token = cookies["nextauth.token"];
-    const userId = cookies["nextauth.userId"];
-
-    if (token && userId) {
-      setDashboardHref(`/dashboard/${userId}`);
-    } else {
-      setDashboardHref(null);
-    }
-  }, []);
-
-  function handleLogout() {
-    destroyCookie(undefined, "nextauth.token");
-    destroyCookie(undefined, "nextauth.userId");
-
-    setDashboardHref(null);
-    router.push("/");
-  }
-
+export function Header({ onOpenMenu }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
-      <Container>
-        <div className="flex min-h-[4.5rem] items-center justify-between gap-3 py-2">
-          <Link
-            href="/"
-            className="shrink-0 text-base font-black tracking-[0.18em] text-white sm:text-lg"
-          >
-            Will<span className="text-brand">Tech</span>
-          </Link>
+    <header
+      className="
+        absolute
+        top-0
+        left-0
+        z-50
+        w-full
+        h-20
+        px-4
+        md:px-8
+        text-white
+      "
+    >
+      <div className="relative h-full flex items-center justify-between">
 
-          <nav className="hidden items-center gap-5 lg:flex xl:gap-6">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-slate-300 transition hover:text-white"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+        {/* Menu mobile */}
+        <button
+          onClick={onOpenMenu}
+          className="
+            flex
+            md:hidden
+            items-center
+            justify-center
+            h-10
+            w-10
+          "
+          aria-label="Abrir menu"
+        >
+          <Menu size={25} />
+        </button>
 
-          <div className="hidden items-center gap-3 sm:flex">
-            {dashboardHref && (
-              <>
-                <Button
-                  href={dashboardHref}
-                  variant="secondary"
-                  className="hidden lg:inline-flex"
-                >
-                  Painel
-                </Button>
 
-                <button
-                  onClick={handleLogout}
-                  className="hidden h-10 items-center justify-center rounded-xl border border-red-500/30 px-4 text-sm font-semibold text-red-400 transition hover:bg-red-500/10 lg:inline-flex"
-                >
-                  Sair
-                </button>
-              </>
-            )}
-
-            <Button
-              href="/orcamento"
-              variant="secondary"
-              className="hidden lg:inline-flex"
-            >
-              Fazer orçamento
-            </Button>
-
-            <Button href="/agendamento">Agendar</Button>
-          </div>
+        {/* Menu esquerdo desktop */}
+        <nav className="hidden md:flex items-center gap-8">
 
           <button
-            type="button"
-            aria-label={open ? "Fechar menu" : "Abrir menu"}
-            onClick={() => setOpen((prev) => !prev)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white transition hover:bg-white/10 lg:hidden"
+            className="
+              flex
+              items-center
+              h-10
+              text-sm
+              font-medium
+              hover:opacity-70
+              transition
+            "
           >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            Novidades
           </button>
-        </div>
-      </Container>
 
-      {/* MENU MOBILE */}
-      <div
-        className={cn(
-          "lg:hidden",
-          open ? "pointer-events-auto" : "pointer-events-none"
-        )}
-      >
-        {/* OVERLAY */}
-        <div
-          onClick={() => setOpen(false)}
-          className={cn(
-            "fixed inset-0 top-[73px] bg-slate-950/70 transition-opacity",
-            open ? "opacity-100" : "opacity-0"
-          )}
-        />
 
-        {/* CARD COM SCROLL */}
+          <button
+            className="
+              flex
+              items-center
+              h-10
+              text-sm
+              font-medium
+              hover:opacity-70
+              transition
+            "
+          >
+            Vestidos
+          </button>
+
+        </nav>
+
+
+
+        {/* Logo */}
+
         <div
-          className={cn(
-            "fixed inset-x-4 top-[84px] max-h-[calc(100dvh-100px)] overflow-y-auto rounded-[2rem] border border-white/10 bg-slate-950/95 p-4 shadow-2xl transition-all duration-200",
-            open ? "translate-y-0 opacity-100" : "-translate-y-3 opacity-0"
-          )}
+          className="
+            absolute
+            left-1/2
+            -translate-x-1/2
+            whitespace-nowrap
+          "
         >
-          <nav className="grid gap-2">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="rounded-2xl border border-transparent px-4 py-3 text-sm font-medium text-slate-200 transition hover:border-white/10 hover:bg-white/5"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
 
-          <div className="mt-4 grid gap-3 border-t border-white/10 pt-4">
-            {dashboardHref && (
-              <>
-                <Button
-                  href={dashboardHref}
-                  variant="secondary"
-                  className="w-full"
-                  onClick={() => setOpen(false)}
-                >
-                  Ir para o painel
-                </Button>
+          {/* Mobile */}
 
-                <button
-                  onClick={() => {
-                    handleLogout();
-                    setOpen(false);
-                  }}
-                  className="w-full rounded-xl border border-red-500/30 px-4 py-3 text-sm font-semibold text-red-400 transition hover:bg-red-500/10"
-                >
-                  Sair
-                </button>
-              </>
-            )}
+          <h1
+            className={`
+              block
+              md:hidden
+              ${playfair.className}
+              text-2xl
+              font-semibold
+              tracking-[0.35em]
+              text-white
+              drop-shadow-lg
+            `}
+          >
+            UA
+          </h1>
 
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Button
-                href="/orcamento"
-                variant="secondary"
-                className="w-full"
-                onClick={() => setOpen(false)}
-              >
-                Fazer orçamento
-              </Button>
 
-              <Button
-                href="/agendamento"
-                className="w-full"
-                onClick={() => setOpen(false)}
-              >
-                Agendar
-              </Button>
-            </div>
-          </div>
+          {/* Desktop */}
+
+          <h1
+            className={`
+              hidden
+              md:block
+              ${playfair.className}
+              text-3xl
+              font-semibold
+              tracking-wide
+              text-white
+              drop-shadow-lg
+            `}
+          >
+            UzzeAura
+          </h1>
+
+
         </div>
+
+
+
+        {/* Menu direito */}
+
+        <nav className="ml-auto flex items-center gap-2 md:gap-6">
+
+
+          {/* Links desktop */}
+
+          <div className="hidden md:flex items-center gap-8">
+
+            <button
+              className="
+                flex
+                items-center
+                h-10
+                text-sm
+                font-medium
+                hover:opacity-70
+                transition
+              "
+            >
+              Conjuntos
+            </button>
+
+
+            <button
+              className="
+                flex
+                items-center
+                h-10
+                text-sm
+                font-medium
+                hover:opacity-70
+                transition
+              "
+            >
+              Coleção
+            </button>
+
+          </div>
+
+
+
+          {/* Ícones */}
+
+          <div className="flex items-center gap-2 md:gap-4">
+
+
+            {/* Pesquisa */}
+
+            <button
+              className="
+                flex
+                items-center
+                justify-center
+                h-10
+                w-10
+                hover:opacity-70
+                transition
+              "
+              aria-label="Pesquisar"
+            >
+              <Search size={20}/>
+            </button>
+
+
+
+            {/* Login desktop */}
+
+            <button
+              className="
+                hidden
+                md:flex
+                items-center
+                justify-center
+                h-10
+                w-10
+                hover:opacity-70
+                transition
+              "
+              aria-label="Usuário"
+            >
+              <User size={20}/>
+            </button>
+            
+            {/* Sacola */}
+
+            <button
+              className="
+                flex
+                items-center
+                justify-center
+                h-10
+                w-10
+                hover:opacity-70
+                transition
+              "
+              aria-label="Carrinho"
+            >
+              <ShoppingBag size={20}/>
+            </button>
+          </div>
+        </nav>
       </div>
     </header>
   );

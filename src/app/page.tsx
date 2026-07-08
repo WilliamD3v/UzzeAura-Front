@@ -1,46 +1,38 @@
 "use client";
 
-import { Hero } from "@/components/sections/hero";
-import { ServicesPreview } from "@/components/sections/services-preview";
-import { Process } from "@/components/sections/process";
-import { PortfolioPreview } from "@/components/sections/portfolio-preview";
-import { Testimonials } from "@/components/sections/testimonials";
-import { FAQ } from "@/components/sections/faq";
-import { CtaBanner } from "@/components/sections/cta-banner";
-import { SectionIndicator } from "@/components/ui/section-indicator";
+import { useState } from "react";
 
-export default function HomePage() {
+import { Header } from "@/components/layout/Header";
+import { MobileMenu } from "@/components/layout/MobileMenu";
+import { FashionBanner } from "@/components/banner/FashionBanner";
+import { PremiereProducts } from "@/components/home/PremiereProducts";
+import { Footer } from "@/components/layout/footer";
+
+export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <>
-      <SectionIndicator />
+    <main className="min-h-screen bg-[#F8F6F2]">
+      <Header
+        onOpenMenu={() => setMenuOpen(true)}
+      />
 
-      <section id="hero">
-        <Hero />
+      <MobileMenu
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+      />
+
+      <section className="flex min-h-screen items-center justify-center">
+        <FashionBanner />
       </section>
 
-      <section id="services">
-        <ServicesPreview />
+      <section>
+        <PremiereProducts/>
       </section>
 
-      <section id="process">
-        <Process />
+      <section>
+        <Footer />
       </section>
-
-      <section id="portfolio">
-        <PortfolioPreview />
-      </section>
-
-      <section id="testimonials">
-        <Testimonials />
-      </section>
-
-      <section id="faq">
-        <FAQ />
-      </section>
-
-      <section id="cta">
-        <CtaBanner />
-      </section>
-    </>
+    </main>
   );
 }

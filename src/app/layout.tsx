@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
-import { queryClient } from "@/services/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { AuthProvider } from "@/context/authContext";
-import { MenuProvider } from "@/context/MenuContext";
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://willtech.com.br"),
 
   title: {
-    default: "WillTech | Criação de Sites Profissionais",
-    template: "%s | WillTech",
+    default: "UzzeAura",
+    template: "%s | UzzeAura",
   },
 
   description:
@@ -59,18 +58,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className={cn("font-sans", geist.variable)}>
       <body>
-        <QueryClientProvider client={queryClient}>
-          <MenuProvider>
-
-          <Header />
           <main>
-            <AuthProvider>{children}</AuthProvider>
-            <Footer />
+            {children}
           </main>
-          </MenuProvider>
-        </QueryClientProvider>
       </body>
     </html>
   );

@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 import axios from "@/lib/axios";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
@@ -132,3 +132,4 @@ export const useAuth = () => {
   }
   return context;
 };
+ */

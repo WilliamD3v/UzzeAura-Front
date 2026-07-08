@@ -1,31 +1,165 @@
-import Link from "next/link";
-import { Container } from "@/components/ui/container";
+"use client";
+
+import { Instagram, Facebook } from "lucide-react";
+import { playfair } from "@/lib/fonts";
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 py-8 sm:py-10">
-      <Container>
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <div className="space-y-3">
-            <p className="text-base font-black tracking-[0.15em] text-white sm:text-lg">
-              Will<span className="text-brand">Tech</span>
-            </p>
-            <p className="max-w-md text-sm leading-7 text-slate-400">
-              Desenvolvimento de sites, landing pages e sistemas sob medida com foco em performance, organização e conversão.
-            </p>
+    <footer className="bg-[#f5f1ea]">
+
+      <div
+        className="
+          max-w-7xl
+          mx-auto
+          px-4
+          py-5
+        "
+      >
+
+        <div
+          className="
+            flex
+            flex-col
+            items-center
+          "
+        >
+
+          {/* Marca */}
+
+          <h2
+            className={`
+              ${playfair.className}
+              text-2xl
+              text-neutral-900
+              tracking-wide
+            `}
+          >
+            Uzze
+          </h2>
+
+
+          {/* Menu */}
+
+          <nav
+            className="
+              flex
+              justify-center
+              gap-5
+              mt-3
+
+              text-xs
+              text-neutral-500
+            "
+          >
+
+            <span className="hover:text-[#C8A85A] transition">
+              Novidades
+            </span>
+
+            <span className="hover:text-[#C8A85A] transition">
+              Vestidos
+            </span>
+
+            <span className="hover:text-[#C8A85A] transition">
+              Conjuntos
+            </span>
+
+            <span className="hover:text-[#C8A85A] transition">
+              Coleção
+            </span>
+
+          </nav>
+
+
+
+          {/* Redes */}
+
+          <div
+            className="
+              flex
+              gap-3
+              mt-4
+            "
+          >
+
+            <button
+              className="
+                w-7
+                h-7
+                rounded-full
+
+                border
+                border-neutral-300
+
+                flex
+                items-center
+                justify-center
+
+                text-neutral-500
+
+                hover:border-[#C8A85A]
+                hover:text-[#C8A85A]
+
+                transition
+              "
+            >
+              <Instagram size={14}/>
+            </button>
+
+
+            <button
+              className="
+                w-7
+                h-7
+                rounded-full
+
+                border
+                border-neutral-300
+
+                flex
+                items-center
+                justify-center
+
+                text-neutral-500
+
+                hover:border-[#C8A85A]
+                hover:text-[#C8A85A]
+
+                transition
+              "
+            >
+              <Facebook size={14}/>
+            </button>
+
+
           </div>
 
-          <div className="space-y-3 text-sm text-slate-400">
-            <p className="break-words">Email: williansilva99112@williamdev.com</p>
-            <p>WhatsApp: (83) 99682-3375</p>
-            <div className="flex flex-wrap gap-4 pt-1 text-slate-300">
-              <Link href="/orcamento">Orçamento</Link>
-              <Link href="/agendamento">Agendamento</Link>
-              <Link href="/contato">Contato</Link>
-            </div>
-          </div>
+
         </div>
-      </Container>
+
+
+        {/* Copyright */}
+
+        <div
+          className="
+            mt-4
+            pt-3
+
+            border-t
+            border-neutral-200
+
+            text-center
+
+            text-[11px]
+            text-neutral-400
+          "
+        >
+          © {new Date().getFullYear()} Uzze
+        </div>
+
+
+      </div>
+
     </footer>
   );
 }

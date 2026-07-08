@@ -2,11 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes floatingQuestion {
+
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+
+}
+
+.animate-floating-question {
+  animation: floatingQuestion 2.5s ease-in-out infinite;
+}
+
 :root {
-  color-scheme: dark;
+  --background: #faf8f5;
+  --foreground: #1f2937;
+  --primary: #c9a227;
+  --secondary: #ffffff;
 }
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -15,43 +40,7 @@ html {
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  overflow-x: hidden;
-  background:
-    radial-gradient(circle at top, rgba(20, 184, 166, 0.12), transparent 30%),
-    linear-gradient(180deg, #07111f 0%, #091829 45%, #07111f 100%);
-  color: #f8fafc;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-input,
-textarea,
-select,
-button {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
-img,
-svg,
-video,
-canvas,
-iframe {
-  max-width: 100%;
-}
-
-textarea {
-  resize: vertical;
-}
-
-::selection {
-  background: rgba(20, 184, 166, 0.3);
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
 }
