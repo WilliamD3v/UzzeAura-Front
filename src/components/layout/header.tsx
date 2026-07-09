@@ -120,36 +120,6 @@ export function Header({ onOpenMenu }: HeaderProps) {
         <nav className="ml-auto flex items-center gap-2 md:gap-6">
           {/* Links desktop */}
 
-          <div className="hidden md:flex items-center gap-8">
-            <button
-              className="
-                flex
-                items-center
-                h-10
-                text-sm
-                font-medium
-                hover:opacity-70
-                transition
-              "
-            >
-              Conjuntos
-            </button>
-
-            <button
-              className="
-                flex
-                items-center
-                h-10
-                text-sm
-                font-medium
-                hover:opacity-70
-                transition
-              "
-            >
-              Coleção
-            </button>
-          </div>
-
           {/* Ícones */}
 
           <div className="flex items-center gap-2 md:gap-4">
