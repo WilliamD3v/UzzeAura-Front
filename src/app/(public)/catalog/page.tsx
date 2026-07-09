@@ -8,7 +8,7 @@ import { Footer } from '@/components/layout/footer'
 import { products } from '@/data/products'
 import { useState } from 'react'
 
-const PRODUCTS_PER_PAGE = 8
+const PRODUCTS_PER_PAGE = 4
 
 export default function CatalogPage() {
   const [currentPage, setCurrentPage] = useState(1)
