@@ -1,65 +1,60 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { X } from "lucide-react";
+import { X } from 'lucide-react'
+import Link from 'next/link'
 
 type MobileMenuProps = {
-  open: boolean;
-  onClose: () => void;
-};
+  open: boolean
+  onClose: () => void
+}
 
 const menuItems = [
   {
-    name: "Início",
-    href: "/",
+    name: 'Início',
+    href: '/',
   },
   {
-    name: "Novidades",
-    href: "/novidades",
+    name: 'Novidades',
+    href: '/novidades',
   },
   {
-    name: "Vestidos",
-    href: "/vestidos",
+    name: 'Vestidos',
+    href: '/vestidos',
   },
   {
-    name: "Conjuntos",
-    href: "/conjuntos",
+    name: 'Conjuntos',
+    href: '/conjuntos',
   },
   {
-    name: "Coleções",
-    href: "/colecoes",
+    name: 'Coleções',
+    href: '/colecoes',
   },
   {
-    name: "Promoções",
-    href: "/promocoes",
+    name: 'Promoções',
+    href: '/promocoes',
   },
   {
-    name: "Contato",
-    href: "/contato",
+    name: 'Contato',
+    href: '/contato',
   },
-];
+]
 
-export function MobileMenu({
-  open,
-  onClose,
-}: MobileMenuProps) {
+export function MobileMenu({ open, onClose }: MobileMenuProps) {
   return (
     <>
       {/* Overlay */}
       <div
         onClick={onClose}
-        className={`fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${open
-            ? "visible opacity-100"
-            : "invisible opacity-0"
-          }`}
+        className={`fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
+          open ? 'visible opacity-100' : 'invisible opacity-0'
+        }`}
       />
 
       {/* Menu lateral */}
       <aside
-        className={`fixed left-0 top-0 z-[70] flex h-full w-[85%] max-w-sm flex-col bg-[#F8F6F2] p-6 shadow-2xl transition-transform duration-500 ease-in-out lg:hidden ${open
-            ? "translate-x-0"
-            : "-translate-x-full"
-          }`}
+        className={`fixed left-0 top-0 z-[70] flex h-full w-[85%] max-w-sm flex-col bg-[#F8F6F2] p-6 shadow-2xl transition-transform duration-500 ease-in-out lg:hidden ${
+          open ? 'translate-x-0' : '-translate-x-full'
+        }`}
       >
         {/* Cabeçalho menu */}
         <div className="mb-10 flex items-center justify-between">
@@ -109,5 +104,5 @@ export function MobileMenu({
         </div>
       </aside>
     </>
-  );
+  )
 }

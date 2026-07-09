@@ -1,34 +1,29 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { products } from "@/data/products";
-import { CatalogHero } from "@/components/catalog/CatalogHero";
-import { ProductGrid } from "@/components/catalog/ProductGrid";
-import { CatalogPagination } from "@/components/catalog/CatalogPagination";
-import { Footer } from "@/components/layout/footer";
-import { CollectionDivider } from "@/components/catalog/CollectionDivider";
+import { CatalogHero } from '@/components/catalog/CatalogHero'
+import { CatalogPagination } from '@/components/catalog/CatalogPagination'
+import { CollectionDivider } from '@/components/catalog/CollectionDivider'
+import { ProductGrid } from '@/components/catalog/ProductGrid'
+import { Footer } from '@/components/layout/footer'
+import { products } from '@/data/products'
+import { useState } from 'react'
 
-const PRODUCTS_PER_PAGE = 8;
+const PRODUCTS_PER_PAGE = 8
 
 export default function CatalogPage() {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1)
 
-  const featuredProducts = products.filter(
-    (product) => product.status.destaque
-  );
+  const featuredProducts = products.filter((product) => product.status.destaque)
 
-  const totalPages = Math.ceil(
-    featuredProducts.length / PRODUCTS_PER_PAGE
-  );
+  const totalPages = Math.ceil(featuredProducts.length / PRODUCTS_PER_PAGE)
 
-  const start = (currentPage - 1) * PRODUCTS_PER_PAGE;
-  const end = start + PRODUCTS_PER_PAGE;
+  const start = (currentPage - 1) * PRODUCTS_PER_PAGE
+  const end = start + PRODUCTS_PER_PAGE
 
-  const currentProducts = featuredProducts.slice(start, end);
+  const currentProducts = featuredProducts.slice(start, end)
 
   return (
     <main className="bg-white min-h-screen">
-
       <CatalogHero />
 
       <div>
@@ -53,5 +48,5 @@ export default function CatalogPage() {
         <Footer />
       </div>
     </main>
-  );
+  )
 }

@@ -1,16 +1,12 @@
-import { Product } from "@/data/products";
-import { ProductCard } from "./ProductCard";
-
+import { Product } from '@/data/products'
+import { ProductCard } from './ProductCard'
 
 interface Props {
-  products: Product[];
+  products: Product[]
 }
 
-
 export function ProductGrid({ products }: Props) {
-
   return (
-
     <div
       className="
         grid
@@ -31,18 +27,9 @@ export function ProductGrid({ products }: Props) {
         lg:gap-y-14
       "
     >
-
       {products.map((product) => (
-
-        <ProductCard
-          key={product._id}
-          product={product}
-        />
-
+        <ProductCard key={product._id} product={product} />
       ))}
-
     </div>
-
-  );
-
+  )
 }

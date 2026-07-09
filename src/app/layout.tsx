@@ -1,69 +1,66 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { Geist } from "next/font/google";
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils'
+import type { Metadata } from 'next'
+import { Geist } from 'next/font/google'
+import './globals.css'
 
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://willtech.com.br"),
+  metadataBase: new URL('https://willtech.com.br'),
 
   title: {
-    default: "UzzeAura",
-    template: "%s | UzzeAura",
+    default: 'UzzeAura',
+    template: '%s | UzzeAura',
   },
 
   description:
-    "Desenvolvimento de sites, landing pages e sistemas personalizados para empresas.",
+    'Desenvolvimento de sites, landing pages e sistemas personalizados para empresas.',
 
   keywords: [
-    "criação de sites",
-    "desenvolvimento web",
-    "landing page",
-    "sistema web",
-    "Next.js",
-    "React",
-    "WillTech",
+    'criação de sites',
+    'desenvolvimento web',
+    'landing page',
+    'sistema web',
+    'Next.js',
+    'React',
+    'WillTech',
   ],
 
-  authors: [{ name: "WillTech" }],
+  authors: [{ name: 'WillTech' }],
 
-  creator: "WillTech",
+  creator: 'WillTech',
 
   openGraph: {
-    title: "WillTech",
+    title: 'WillTech',
     description:
-      "Desenvolvimento de sites profissionais e sistemas personalizados.",
-    url: "https://willtech.com.br",
-    siteName: "WillTech",
-    locale: "pt_BR",
-    type: "website",
+      'Desenvolvimento de sites profissionais e sistemas personalizados.',
+    url: 'https://willtech.com.br',
+    siteName: 'WillTech',
+    locale: 'pt_BR',
+    type: 'website',
   },
 
   twitter: {
-    card: "summary_large_image",
-    title: "WillTech",
+    card: 'summary_large_image',
+    title: 'WillTech',
     description:
-      "Desenvolvimento de sites profissionais e sistemas personalizados.",
+      'Desenvolvimento de sites profissionais e sistemas personalizados.',
   },
 
   robots: {
     index: true,
     follow: true,
   },
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={cn("font-sans", geist.variable)}>
+    <html lang="pt-BR" className={cn('font-sans', geist.variable)}>
       <body>
-          <main>
-            {children}
-          </main>
+        <main>{children}</main>
       </body>
     </html>
-  );
+  )
 }

@@ -1,7 +1,7 @@
 interface Props {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
+  currentPage: number
+  totalPages: number
+  onPageChange: (page: number) => void
 }
 
 export function CatalogPagination({
@@ -11,10 +11,8 @@ export function CatalogPagination({
 }: Props) {
   return (
     <div className="flex justify-center gap-3">
-
       {Array.from({ length: totalPages }).map((_, index) => {
-
-        const page = index + 1;
+        const page = index + 1
 
         return (
           <button
@@ -23,15 +21,14 @@ export function CatalogPagination({
             className={`h-10 w-10 rounded-full border transition
               ${
                 currentPage === page
-                  ? "bg-black text-white border-black"
-                  : "border-neutral-300 hover:border-black"
+                  ? 'bg-black text-white border-black'
+                  : 'border-neutral-300 hover:border-black'
               }`}
           >
             {page}
           </button>
-        );
+        )
       })}
-
     </div>
-  );
+  )
 }

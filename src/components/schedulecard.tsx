@@ -1,44 +1,49 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { Clock3, Ticket } from "lucide-react";
-import { MdDoNotDisturbOn } from "react-icons/md";
-import { GiConfirmed } from "react-icons/gi";
+import { Clock3, Ticket } from 'lucide-react'
+import { useState } from 'react'
+import { GiConfirmed } from 'react-icons/gi'
+import { MdDoNotDisturbOn } from 'react-icons/md'
 
 type ScheduleProps = {
-  _id: string;
-  ticketNumber: string;
-  name: string;
-  phone: string;
-  notes?: string;
-  service: string;
-  status?: string;
-  createdAt: string;
-};
+  _id: string
+  ticketNumber: string
+  name: string
+  phone: string
+  notes?: string
+  service: string
+  status?: string
+  createdAt: string
+}
 
 type Props = {
-  schedule: ScheduleProps;
-  onDelete?: (id: string, description: string) => void;
-  onStatus?: (id: string) => void;
-  refetch: () => void;
-};
+  schedule: ScheduleProps
+  onDelete?: (id: string, description: string) => void
+  onStatus?: (id: string) => void
+  refetch: () => void
+}
 
-export default function ScheduleCard({ schedule, onDelete, onStatus, refetch }: Props) {
-  const [openCancel, setOpenCancel] = useState(false);
-  const [description, setDescription] = useState("");
+export default function ScheduleCard({
+  schedule,
+  onDelete,
+  onStatus,
+  refetch,
+}: Props) {
+  const [openCancel, setOpenCancel] = useState(false)
+  const [description, setDescription] = useState('')
 
   function formatDateTime(dateString: string) {
-    const date = new Date(dateString);
+    const date = new Date(dateString)
 
-    if (isNaN(date.getTime())) return "Data inválida";
+    if (isNaN(date.getTime())) return 'Data inválida'
 
-    return date.toLocaleString("pt-BR", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
+    return date.toLocaleString('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    })
   }
 
   const handleApproved = async () => {
@@ -46,21 +51,21 @@ export default function ScheduleCard({ schedule, onDelete, onStatus, refetch }: 
   }
 
   const handleComplete = async () => {
-    onDelete?.(schedule._id, "CONCLUÍDO");
+    onDelete?.(schedule._id, 'CONCLUÍDO')
 
     refetch()
-  };
+  }
 
   const handleCancel = () => {
-    if (!description.trim()) return;
+    if (!description.trim()) return
 
-    onDelete?.(schedule._id, description.trim());
+    onDelete?.(schedule._id, description.trim())
 
     refetch()
 
-    setDescription("");
-    setOpenCancel(false);
-  };
+    setDescription('')
+    setOpenCancel(false)
+  }
 
   return (
     <article className="rounded-[2rem] border border-white/10 bg-white/5 p-5 sm:p-6">
@@ -80,7 +85,7 @@ export default function ScheduleCard({ schedule, onDelete, onStatus, refetch }: 
       </div>
 
       <div className="mt-4 flex gap-2">
-        {schedule.status === "pending" ? (
+        {schedule.status === 'pending' ? (
           <button
             onClick={handleApproved}
             className="text-green-400 p-2 rounded-xl border border-white/10 bg-slate-950/60"
@@ -101,11 +106,9 @@ export default function ScheduleCard({ schedule, onDelete, onStatus, refetch }: 
         >
           <MdDoNotDisturbOn size={18} />
         </button>
-
       </div>
       {openCancel && (
         <div className="mt-4 rounded-2xl border border-white/10 bg-slate-950/40 p-4">
-
           <input
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -114,11 +117,10 @@ export default function ScheduleCard({ schedule, onDelete, onStatus, refetch }: 
           />
 
           <div className="mt-3 flex gap-2">
-
             <button
               onClick={() => {
-                setOpenCancel(false);
-                setDescription("");
+                setOpenCancel(false)
+                setDescription('')
               }}
               className="px-3 py-2 rounded-xl border border-white/10 text-slate-300"
             >
@@ -128,19 +130,18 @@ export default function ScheduleCard({ schedule, onDelete, onStatus, refetch }: 
             <button
               onClick={handleCancel}
               disabled={!description.trim()}
-              className={`px-3 py-2 rounded-xl font-semibold transition ${description.trim()
-                  ? "bg-red-500 text-white"
-                  : "bg-red-500/30 text-white/40 cursor-not-allowed"
-                }`}
+              className={`px-3 py-2 rounded-xl font-semibold transition ${
+                description.trim()
+                  ? 'bg-red-500 text-white'
+                  : 'bg-red-500/30 text-white/40 cursor-not-allowed'
+              }`}
             >
               Confirmar cancelamento
             </button>
-
           </div>
         </div>
       )}
       <div className="mt-5 space-y-3 text-white">
-
         <div>
           <p className="text-xs text-slate-400">Cliente</p>
           <p className="font-semibold">{schedule.name}</p>
@@ -159,11 +160,10 @@ export default function ScheduleCard({ schedule, onDelete, onStatus, refetch }: 
         <div>
           <p className="text-xs text-slate-400">Observações</p>
           <p className="text-sm text-slate-300">
-            {schedule.notes?.trim() || "Nenhuma observação"}
+            {schedule.notes?.trim() || 'Nenhuma observação'}
           </p>
         </div>
-
       </div>
     </article>
-  );
+  )
 }

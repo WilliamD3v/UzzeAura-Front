@@ -1,15 +1,13 @@
-"use client";
+'use client'
 
-import { ArrowLeft, SlidersHorizontal } from "lucide-react";
-import Link from "next/link";
+import { ArrowLeft, SlidersHorizontal } from 'lucide-react'
+import Link from 'next/link'
 
-import { montserrat } from "@/lib/fonts";
-
+import { montserrat } from '@/lib/fonts'
 
 export function CatalogHero() {
   return (
     <section className="border-b border-neutral-100">
-
       <div
         className="
           mx-auto
@@ -26,8 +24,6 @@ export function CatalogHero() {
           md:pb-10
         "
       >
-
-
         {/* Voltar Home */}
 
         <Link
@@ -62,13 +58,9 @@ export function CatalogHero() {
           <ArrowLeft size={18} />
         </Link>
 
-
-
-
         {/* Título */}
 
         <div className="mt-8 md:mt-10">
-
           <span
             className="
               text-[11px]
@@ -83,8 +75,6 @@ export function CatalogHero() {
           >
             Nova Coleção
           </span>
-
-
 
           <p
             className={`
@@ -111,13 +101,7 @@ export function CatalogHero() {
           >
             Coleções pensadas para expressar seu estilo com elegância.
           </p>
-
-
         </div>
-
-
-
-
 
         {/* Linha informativa */}
 
@@ -140,7 +124,6 @@ export function CatalogHero() {
             md:pt-6
           "
         >
-
           <span
             className="
               text-[10px]
@@ -156,7 +139,6 @@ export function CatalogHero() {
             Coleção feminina
           </span>
 
-
           <span
             className="
               text-[10px]
@@ -171,19 +153,11 @@ export function CatalogHero() {
           >
             Seleção exclusiva
           </span>
-
-
         </div>
-
-
-
-
 
         {/* Botão Lançamentos + Filtro */}
 
         <div className="mt-6 md:mt-8 relative">
-
-
           <Link
             href="/lancamentos"
 
@@ -219,8 +193,6 @@ export function CatalogHero() {
               hover:bg-[#f7f4ee]
             "
           >
-
-
             <span
               className="
                 text-xs
@@ -249,21 +221,13 @@ export function CatalogHero() {
               Lançamentos
             </span>
 
-
             <span
               className="
                 w-24
                 md:w-32
               "
             />
-
-
-
           </Link>
-
-
-
-
 
           {/* Filtro */}
 
@@ -325,23 +289,12 @@ export function CatalogHero() {
               hover:text-black
             "
           >
-
             <SlidersHorizontal size={15} />
 
-            <span>
-              Filtros
-            </span>
-
-
+            <span>Filtros</span>
           </button>
-
-
-
         </div>
-
-
       </div>
-
     </section>
-  );
+  )
 }

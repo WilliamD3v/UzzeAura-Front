@@ -1,27 +1,24 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import { ShoppingBag } from "lucide-react";
-import { products } from "@/data/products";
-import { playfair } from "@/lib/fonts";
+import { products } from '@/data/products'
+import { playfair } from '@/lib/fonts'
+import { ShoppingBag } from 'lucide-react'
+import Image from 'next/image'
 
 export function PremiereProducts() {
   const premiereProducts = products
     .filter((product) => product.status.estreia)
-    .slice(0, 4);
+    .slice(0, 4)
 
   return (
     <section className="w-full py-20 bg-[#faf8f5]">
       <div className="max-w-7xl mx-auto px-4">
-
         {/* Título */}
 
         <div className="text-center mb-14">
-
           <p className="uppercase tracking-[0.35em] text-neutral-500 text-sm">
             Conheça antes de todos
           </p>
-
 
           <h2
             className={`${playfair.className}
@@ -33,11 +30,9 @@ export function PremiereProducts() {
             Em Estreia
           </h2>
 
-
           {/* Divisor */}
 
           <div className="mt-6 flex items-center justify-center gap-4">
-
             <div
               className="
                 h-px
@@ -50,7 +45,6 @@ export function PremiereProducts() {
               "
             />
 
-
             <span
               className="
                 text-xl
@@ -60,7 +54,6 @@ export function PremiereProducts() {
             >
               ✦
             </span>
-
 
             <div
               className="
@@ -73,11 +66,8 @@ export function PremiereProducts() {
                 to-[#E8D28A]
               "
             />
-
           </div>
-
         </div>
-
 
         {/* Produtos */}
 
@@ -96,11 +86,8 @@ export function PremiereProducts() {
             lg:grid-cols-4
           "
         >
-
-          {premiereProducts.map((product) => (
-
+          {premiereProducts.map((product) =>
             product.status.post ? (
-
               <div
                 key={product._id}
                 className="
@@ -119,7 +106,6 @@ export function PremiereProducts() {
                   md:min-w-0
                 "
               >
-
                 {/* Imagem */}
 
                 <div
@@ -129,7 +115,6 @@ export function PremiereProducts() {
                     overflow-hidden
                   "
                 >
-
                   <Image
                     src={product.image}
                     alt={product.name}
@@ -141,23 +126,18 @@ export function PremiereProducts() {
                       duration-700
                     "
                   />
-
                 </div>
-
 
                 {/* Informações */}
 
                 <div className="p-5">
-
                   <h3 className="font-medium text-lg text-neutral-900">
                     {product.name}
                   </h3>
 
-
                   <p className="mt-2 text-xl font-semibold text-neutral-900">
                     R$ {product.price.toFixed(2)}
                   </p>
-
 
                   <button
                     className="
@@ -178,21 +158,11 @@ export function PremiereProducts() {
                     "
                   >
                     <ShoppingBag size={18} />
-
                     Comprar
-
                   </button>
-
-
                 </div>
-
-
               </div>
-
-
             ) : (
-
-
               <div
                 key={product._id}
                 className="
@@ -220,7 +190,6 @@ export function PremiereProducts() {
                   text-white
                 "
               >
-
                 {/* Brilho */}
 
                 <div
@@ -233,7 +202,6 @@ export function PremiereProducts() {
                     blur-3xl
                   "
                 />
-
 
                 {/* Interrogação */}
 
@@ -248,7 +216,6 @@ export function PremiereProducts() {
                   ?
                 </span>
 
-
                 <p
                   className="
                     mt-6
@@ -260,7 +227,6 @@ export function PremiereProducts() {
                   Em breve
                 </p>
 
-
                 <span
                   className="
                     text-xs
@@ -270,20 +236,11 @@ export function PremiereProducts() {
                 >
                   Nova coleção
                 </span>
-
-
               </div>
-
-            )
-
-          ))}
-
-
+            ),
+          )}
         </div>
-
-
       </div>
-
     </section>
-  );
+  )
 }

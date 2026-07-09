@@ -1,25 +1,20 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import { ShoppingBag } from "lucide-react";
-import { Product } from "@/data/products";
-
+import { Product } from '@/data/products'
+import { ShoppingBag } from 'lucide-react'
+import Image from 'next/image'
 
 type Props = {
-  product: Product;
-};
-
+  product: Product
+}
 
 export function ProductCard({ product }: Props) {
-
   return (
-
     <article
       className="
         group
       "
     >
-
       {/* Imagem */}
 
       <div
@@ -35,11 +30,9 @@ export function ProductCard({ product }: Props) {
           bg-neutral-100
         "
       >
-
         {/* Badge */}
 
         {product.status.estreia && (
-
           <span
             className="
               absolute
@@ -69,10 +62,7 @@ export function ProductCard({ product }: Props) {
           >
             Novo
           </span>
-
         )}
-
-
 
         <Image
           src={product.image}
@@ -96,8 +86,6 @@ export function ProductCard({ product }: Props) {
             group-hover:scale-105
           "
         />
-
-
 
         {/* Botão Desktop */}
 
@@ -126,7 +114,6 @@ export function ProductCard({ product }: Props) {
             group-hover:opacity-100
           "
         >
-
           <button
             className="
               flex
@@ -158,20 +145,11 @@ export function ProductCard({ product }: Props) {
               hover:bg-neutral-100
             "
           >
-
             <ShoppingBag size={17} />
-
             Ver Produto
-
           </button>
-
-
         </div>
-
-
       </div>
-
-
 
       {/* Informações */}
 
@@ -188,7 +166,6 @@ export function ProductCard({ product }: Props) {
           md:mt-5
         "
       >
-
         <h3
           className="
             text-sm
@@ -207,8 +184,6 @@ export function ProductCard({ product }: Props) {
           {product.name}
         </h3>
 
-
-
         <span
           className="
             text-sm
@@ -218,20 +193,12 @@ export function ProductCard({ product }: Props) {
             text-neutral-500
           "
         >
-          {product.price.toLocaleString(
-            "pt-BR",
-            {
-              style: "currency",
-              currency: "BRL",
-            }
-          )}
+          {product.price.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          })}
         </span>
-
-
       </div>
-
-
     </article>
-
-  );
+  )
 }

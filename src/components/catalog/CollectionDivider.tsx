@@ -1,18 +1,17 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
 export function CollectionDivider() {
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setLoaded(true);
-    }, 150);
+      setLoaded(true)
+    }, 150)
 
-    return () => clearTimeout(timer);
-  }, []);
-
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <div
@@ -28,8 +27,6 @@ export function CollectionDivider() {
         md:gap-6
       "
     >
-
-
       {/* Linha esquerda */}
 
       <div
@@ -53,17 +50,11 @@ export function CollectionDivider() {
           duration-1000
           ease-out
 
-          ${
-            loaded
-              ? "scale-x-100 opacity-100"
-              : "scale-x-0 opacity-0"
-          }
+          ${loaded ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}
 
           origin-right
         `}
       />
-
-
 
       {/* Estrela */}
 
@@ -82,8 +73,8 @@ export function CollectionDivider() {
 
           ${
             loaded
-              ? "opacity-100 scale-100 rotate-0"
-              : "opacity-0 scale-0 rotate-180"
+              ? 'opacity-100 scale-100 rotate-0'
+              : 'opacity-0 scale-0 rotate-180'
           }
 
           animate-pulse
@@ -91,8 +82,6 @@ export function CollectionDivider() {
       >
         ✦
       </span>
-
-
 
       {/* Linha direita */}
 
@@ -117,17 +106,11 @@ export function CollectionDivider() {
           duration-1000
           ease-out
 
-          ${
-            loaded
-              ? "scale-x-100 opacity-100"
-              : "scale-x-0 opacity-0"
-          }
+          ${loaded ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}
 
           origin-left
         `}
       />
-
-
     </div>
-  );
+  )
 }

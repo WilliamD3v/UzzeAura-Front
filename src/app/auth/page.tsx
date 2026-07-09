@@ -1,45 +1,42 @@
-"use client";
+'use client'
 
 /* import { useAuth } from "@/context/authContext"; */
-import { Eye, EyeOff, Lock, Mail, ShieldCheck } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { FormEvent, useEffect, useState } from "react";
+import { Eye, EyeOff, Lock, Mail, ShieldCheck } from 'lucide-react'
+import { FormEvent, useState } from 'react'
 
 export default function AuthPage() {
   /* const { signIn, alert, loading, user } = useAuth(); */
-  const router = useRouter();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [, setLocalError] = useState('')
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [localError, setLocalError] = useState("");
-
-  const pageTitle = "Entrar na sua conta";
+  const pageTitle = 'Entrar na sua conta'
   const pageSubtitle =
-    "Faça login para acessar sua área administrativa com segurança.";
+    'Faça login para acessar sua área administrativa com segurança.'
 
-/*   useEffect(() => {
+  /*   useEffect(() => {
     if (user?._id) {
       router.push(`/dashboard/${user._id}`);
     }
   }, [user, router]); */
 
   async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    setLocalError("");
+    e.preventDefault()
+    setLocalError('')
 
     if (!email.trim() || !password.trim()) {
-      setLocalError("Preencha email e senha.");
-      return;
+      setLocalError('Preencha email e senha.')
+      return
     }
 
     try {
-/*       await signIn({
+      /*       await signIn({
         email: email.trim(),
         password: password.trim(),
       }); */
     } catch {
-      setLocalError("Não foi possível entrar no sistema.");
+      setLocalError('Não foi possível entrar no sistema.')
     }
   }
 
@@ -63,7 +60,8 @@ export default function AuthPage() {
 
               <p className="mt-5 max-w-lg text-base leading-7 text-slate-300 xl:text-lg">
                 Página de login moderna, elegante e pronta para integrar com seu
-                back-end, mantendo uma experiência limpa no celular e no desktop.
+                back-end, mantendo uma experiência limpa no celular e no
+                desktop.
               </p>
             </div>
 
@@ -137,7 +135,7 @@ export default function AuthPage() {
                       <Lock className="h-5 w-5 text-slate-400" />
 
                       <input
-                        type={showPassword ? "text" : "password"}
+                        type={showPassword ? 'text' : 'password'}
                         placeholder="Digite sua senha"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -158,7 +156,7 @@ export default function AuthPage() {
                     </div>
                   </div>
 
-{/*                   {(localError ||
+                  {/*                   {(localError ||
                     alert?.type === "error" ||
                     alert?.type === "success") && (
                     <div
@@ -189,7 +187,7 @@ export default function AuthPage() {
                     </button>
                   </div>
 
-{/*                   <button
+                  {/*                   <button
                     type="submit"
                     disabled={loading}
                     className="mt-2 flex h-14 w-full items-center justify-center rounded-2xl bg-cyan-400 px-4 text-sm font-black text-slate-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-70"
@@ -207,5 +205,5 @@ export default function AuthPage() {
         </div>
       </div>
     </main>
-  );
+  )
 }

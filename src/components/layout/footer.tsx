@@ -1,12 +1,11 @@
-"use client";
+'use client'
 
-import { Instagram, Facebook } from "lucide-react";
-import { playfair } from "@/lib/fonts";
+import { playfair } from '@/lib/fonts'
+import { Facebook, Instagram } from 'lucide-react'
 
 export function Footer() {
   return (
     <footer className="bg-[#f5f1ea]">
-
       <div
         className="
           max-w-7xl
@@ -15,7 +14,6 @@ export function Footer() {
           py-5
         "
       >
-
         <div
           className="
             flex
@@ -23,7 +21,6 @@ export function Footer() {
             items-center
           "
         >
-
           {/* Marca */}
 
           <h2
@@ -36,7 +33,6 @@ export function Footer() {
           >
             Uzze
           </h2>
-
 
           {/* Menu */}
 
@@ -51,26 +47,14 @@ export function Footer() {
               text-neutral-500
             "
           >
+            <span className="hover:text-[#C8A85A] transition">Novidades</span>
 
-            <span className="hover:text-[#C8A85A] transition">
-              Novidades
-            </span>
+            <span className="hover:text-[#C8A85A] transition">Vestidos</span>
 
-            <span className="hover:text-[#C8A85A] transition">
-              Vestidos
-            </span>
+            <span className="hover:text-[#C8A85A] transition">Conjuntos</span>
 
-            <span className="hover:text-[#C8A85A] transition">
-              Conjuntos
-            </span>
-
-            <span className="hover:text-[#C8A85A] transition">
-              Coleção
-            </span>
-
+            <span className="hover:text-[#C8A85A] transition">Coleção</span>
           </nav>
-
-
 
           {/* Redes */}
 
@@ -81,6 +65,29 @@ export function Footer() {
               mt-4
             "
           >
+            <button
+              className="
+                w-7
+                h-7
+                rounded-full
+
+                border
+                border-neutral-300
+
+                flex
+                items-center
+                justify-center
+
+                text-neutral-500
+
+                hover:border-[#C8A85A]
+                hover:text-[#C8A85A]
+
+                transition
+              "
+            >
+              <Instagram size={14} />
+            </button>
 
             <button
               className="
@@ -103,40 +110,10 @@ export function Footer() {
                 transition
               "
             >
-              <Instagram size={14}/>
+              <Facebook size={14} />
             </button>
-
-
-            <button
-              className="
-                w-7
-                h-7
-                rounded-full
-
-                border
-                border-neutral-300
-
-                flex
-                items-center
-                justify-center
-
-                text-neutral-500
-
-                hover:border-[#C8A85A]
-                hover:text-[#C8A85A]
-
-                transition
-              "
-            >
-              <Facebook size={14}/>
-            </button>
-
-
           </div>
-
-
         </div>
-
 
         {/* Copyright */}
 
@@ -156,10 +133,7 @@ export function Footer() {
         >
           © {new Date().getFullYear()} Uzze
         </div>
-
-
       </div>
-
     </footer>
-  );
+  )
 }

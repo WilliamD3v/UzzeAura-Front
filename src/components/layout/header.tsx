@@ -1,10 +1,10 @@
-"use client";
+'use client'
 
-import { Search, User, ShoppingBag, Menu } from "lucide-react";
-import { playfair } from "@/lib/fonts";
+import { playfair } from '@/lib/fonts'
+import { Menu, Search, ShoppingBag, User } from 'lucide-react'
 
 interface HeaderProps {
-  onOpenMenu: () => void;
+  onOpenMenu: () => void
 }
 
 export function Header({ onOpenMenu }: HeaderProps) {
@@ -23,7 +23,6 @@ export function Header({ onOpenMenu }: HeaderProps) {
       "
     >
       <div className="relative h-full flex items-center justify-between">
-
         {/* Menu mobile */}
         <button
           onClick={onOpenMenu}
@@ -40,10 +39,8 @@ export function Header({ onOpenMenu }: HeaderProps) {
           <Menu size={25} />
         </button>
 
-
         {/* Menu esquerdo desktop */}
         <nav className="hidden md:flex items-center gap-8">
-
           <button
             className="
               flex
@@ -58,7 +55,6 @@ export function Header({ onOpenMenu }: HeaderProps) {
             Novidades
           </button>
 
-
           <button
             className="
               flex
@@ -72,10 +68,7 @@ export function Header({ onOpenMenu }: HeaderProps) {
           >
             Vestidos
           </button>
-
         </nav>
-
-
 
         {/* Logo */}
 
@@ -87,7 +80,6 @@ export function Header({ onOpenMenu }: HeaderProps) {
             whitespace-nowrap
           "
         >
-
           {/* Mobile */}
 
           <h1
@@ -105,7 +97,6 @@ export function Header({ onOpenMenu }: HeaderProps) {
             UA
           </h1>
 
-
           {/* Desktop */}
 
           <h1
@@ -122,21 +113,14 @@ export function Header({ onOpenMenu }: HeaderProps) {
           >
             UzzeAura
           </h1>
-
-
         </div>
-
-
 
         {/* Menu direito */}
 
         <nav className="ml-auto flex items-center gap-2 md:gap-6">
-
-
           {/* Links desktop */}
 
           <div className="hidden md:flex items-center gap-8">
-
             <button
               className="
                 flex
@@ -151,7 +135,6 @@ export function Header({ onOpenMenu }: HeaderProps) {
               Conjuntos
             </button>
 
-
             <button
               className="
                 flex
@@ -165,16 +148,11 @@ export function Header({ onOpenMenu }: HeaderProps) {
             >
               Coleção
             </button>
-
           </div>
-
-
 
           {/* Ícones */}
 
           <div className="flex items-center gap-2 md:gap-4">
-
-
             {/* Pesquisa */}
 
             <button
@@ -189,10 +167,8 @@ export function Header({ onOpenMenu }: HeaderProps) {
               "
               aria-label="Pesquisar"
             >
-              <Search size={20}/>
+              <Search size={20} />
             </button>
-
-
 
             {/* Login desktop */}
 
@@ -209,9 +185,9 @@ export function Header({ onOpenMenu }: HeaderProps) {
               "
               aria-label="Usuário"
             >
-              <User size={20}/>
+              <User size={20} />
             </button>
-            
+
             {/* Sacola */}
 
             <button
@@ -226,11 +202,11 @@ export function Header({ onOpenMenu }: HeaderProps) {
               "
               aria-label="Carrinho"
             >
-              <ShoppingBag size={20}/>
+              <ShoppingBag size={20} />
             </button>
           </div>
         </nav>
       </div>
     </header>
-  );
+  )
 }
