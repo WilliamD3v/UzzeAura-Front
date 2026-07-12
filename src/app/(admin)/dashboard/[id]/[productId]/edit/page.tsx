@@ -1,5 +1,3 @@
-'use client'
-
 import { ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 
@@ -8,26 +6,30 @@ import { useProduct } from '@/data/products'
 import { ProductForm } from '@/components/product/form/ProductForm'
 
 type Props = {
-  params: {
+  params: Promise<{
     id: string
-
     productId: string
-  }
+  }>
 }
 
-export default function EditProductPage({ params }: Props) {
-  const { data: product, isLoading } = useProduct(params.productId)
+export default async function EditProductPage({ params }: Props) {
+  const { id, productId } = await params
+
+  return <EditProductContent id={id} productId={productId} />
+}
+
+function EditProductContent({
+  id,
+  productId,
+}: {
+  id: string
+  productId: string
+}) {
+  const { data: product, isLoading } = useProduct(productId)
 
   if (isLoading) {
     return (
-      <main
-        className="
-        min-h-screen
-        flex
-        items-center
-        justify-center
-      "
-      >
+      <main className="min-h-screen flex items-center justify-center">
         Carregando...
       </main>
     )
@@ -35,14 +37,7 @@ export default function EditProductPage({ params }: Props) {
 
   if (!product) {
     return (
-      <main
-        className="
-        min-h-screen
-        flex
-        items-center
-        justify-center
-      "
-      >
+      <main className="min-h-screen flex items-center justify-center">
         Produto não encontrado
       </main>
     )
@@ -64,7 +59,7 @@ export default function EditProductPage({ params }: Props) {
         "
       >
         <Link
-          href={`/dashboard/${params.id}`}
+          href={`/dashboard/${id}`}
           className="
             mb-6
             inline-flex
@@ -99,12 +94,7 @@ export default function EditProductPage({ params }: Props) {
           Editar Produto
         </h1>
 
-        <p
-          className="
-            mt-3
-            text-neutral-500
-          "
-        >
+        <p className="mt-3 text-neutral-500">
           Atualize todas as informações do produto.
         </p>
 
