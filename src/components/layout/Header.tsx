@@ -2,12 +2,19 @@
 
 import { playfair } from '@/lib/fonts'
 import { Menu, Search, ShoppingBag, User } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 interface HeaderProps {
   onOpenMenu: () => void
 }
 
 export function Header({ onOpenMenu }: HeaderProps) {
+  const router = useRouter()
+
+  const handlerButtonSingIn = () => {
+    router.push('/auth')
+  }
+
   return (
     <header
       className="
@@ -154,6 +161,8 @@ export function Header({ onOpenMenu }: HeaderProps) {
                 transition
               "
               aria-label="Usuário"
+
+              onClick={handlerButtonSingIn}
             >
               <User size={20} />
             </button>

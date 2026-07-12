@@ -1,134 +1,47 @@
+import { getProductById, getProducts } from '@/hooks/products'
+import { useQuery } from '@tanstack/react-query'
+
 export type Product = {
   _id: string
   name: string
-  image: string
+  description: string
   price: number
-
+  image: {
+    url: string
+    filename: string
+    public_id: string
+  }
   status: {
     destaque: boolean
     estreia: boolean
     post: boolean
   }
+  sizes: {
+    size: string
+    colors: {
+      _id: string
+      name: string
+      image: string
+      quantity: number
+    }[]
+  }[]
+  active: boolean
+  createdBy: string
+  createdAt: string
+  updatedAt: string
 }
 
-export const products: Product[] = [
-  {
-    _id: '1',
-    name: 'Vestido Aurora',
-    image:
-      'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=900&q=80',
-    price: 189.9,
+export function useProducts() {
+  return useQuery<Product[]>({
+    queryKey: ['products'],
+    queryFn: getProducts,
+  })
+}
 
-    status: {
-      destaque: false,
-      estreia: true,
-      post: false,
-    },
-  },
-
-  {
-    _id: '2',
-    name: 'Conjunto Milano',
-    image:
-      'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=900&q=80',
-    price: 259.9,
-
-    status: {
-      destaque: false,
-      estreia: true,
-      post: true,
-    },
-  },
-
-  {
-    _id: '3',
-    name: 'Vestido Paris',
-    image:
-      'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=900&q=80',
-    price: 229.9,
-
-    status: {
-      destaque: false,
-      estreia: true,
-      post: false,
-    },
-  },
-  {
-    _id: '4',
-    name: 'Blazer Premium',
-    image:
-      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=900&q=80',
-    price: 329.9,
-
-    status: {
-      destaque: false,
-      estreia: true,
-      post: false,
-    },
-  },
-  {
-    _id: '5',
-    name: 'Blazer Premium',
-    image:
-      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=900&q=80',
-    price: 329.9,
-
-    status: {
-      destaque: false,
-      estreia: false,
-      post: false,
-    },
-  },
-  {
-    _id: '6',
-    name: 'Blazer Premium',
-    image:
-      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=900&q=80',
-    price: 329.9,
-
-    status: {
-      destaque: true,
-      estreia: false,
-      post: false,
-    },
-  },
-  {
-    _id: '7',
-    name: 'Blazer Premium',
-    image:
-      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=900&q=80',
-    price: 329.9,
-
-    status: {
-      destaque: true,
-      estreia: false,
-      post: false,
-    },
-  },
-  {
-    _id: '8',
-    name: 'Blazer Premium',
-    image:
-      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=900&q=80',
-    price: 329.9,
-
-    status: {
-      destaque: true,
-      estreia: false,
-      post: false,
-    },
-  },
-  {
-    _id: '9',
-    name: 'Blazer Premium',
-    image:
-      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=900&q=80',
-    price: 329.9,
-
-    status: {
-      destaque: true,
-      estreia: false,
-      post: false,
-    },
-  },
-]
+export function useProduct(id: string) {
+  return useQuery<Product>({
+    queryKey: ['product', id],
+    queryFn: () => getProductById(id),
+    enabled: !!id,
+  })
+}

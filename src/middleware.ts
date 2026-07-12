@@ -2,36 +2,56 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
+
   const loginURL = new URL('/auth?auth=login', request.url)
 
   const adminToken = request.cookies.get('nextauth.token')?.value
+
   const adminUserId = request.cookies.get('nextauth.userId')?.value
 
   const clientToken = request.cookies.get('nextauth.token.client')?.value
+
   const clientUserId = request.cookies.get('nextauth.userId.client')?.value
 
-  const pathParts = pathname.split('/')
+  const isDashboard = pathname.startsWith('/dashboard')
 
-  const isDashboardRoute = pathname.startsWith('/dashboard/')
-  const isClientRoute = pathname.startsWith('/dashboard/client/')
+  const isClientDashboard = pathname.startsWith('/dashboard/client')
 
-  const routeId = pathParts[2]
+  if (isDashboard && !isClientDashboard) {
+    const parts = pathname.split('/')
 
-  // DASHBOARD /dashboard/:id*
-  if (isDashboardRoute && !isClientRoute) {
+    const dashboardSections = ['products', 'settings', 'orders', 'users']
+
+    const section = parts[2]
+
+    const isInternalDashboardRoute = dashboardSections.includes(section)
+
+    if (isInternalDashboardRoute) {
+      if (!adminToken || !adminUserId) {
+        return NextResponse.redirect(loginURL)
+      }
+
+      return NextResponse.next()
+    }
+
+    const routeId = parts[2]
+
     if (!adminToken || !adminUserId || adminUserId !== routeId) {
       return NextResponse.redirect(loginURL)
     }
+
     return NextResponse.next()
   }
 
-  // CLIENT /dashboard/client/:id*
-  if (isClientRoute) {
-    const clientRouteId = pathParts[3]
+  if (isClientDashboard) {
+    const parts = pathname.split('/')
+
+    const clientRouteId = parts[3]
 
     if (!clientToken || !clientUserId || clientUserId !== clientRouteId) {
       return NextResponse.redirect(loginURL)
     }
+
     return NextResponse.next()
   }
 
@@ -39,5 +59,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [''],
+  matcher: ['/dashboard/:path*'],
 }

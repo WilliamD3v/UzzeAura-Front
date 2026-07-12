@@ -3,6 +3,10 @@ import type { Metadata } from 'next'
 import { Geist } from 'next/font/google'
 import './globals.css'
 
+import { AuthProvider } from '@/context/authContext'
+import { queryClient } from '@/services/queryClient'
+import { QueryClientProvider } from '@tanstack/react-query'
+
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' })
 
 export const metadata: Metadata = {
@@ -59,7 +63,11 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={cn('font-sans', geist.variable)}>
       <body>
-        <main>{children}</main>
+        <QueryClientProvider client={queryClient}>
+          <main>
+            <AuthProvider>{children}</AuthProvider>
+          </main>
+        </QueryClientProvider>
       </body>
     </html>
   )
