@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const URL = 'http://localhost:5001'
+const URL = 'https://uzze-bk-weld.vercel.app'
 
 /* http://localhost:5000 */
 
