@@ -4,7 +4,7 @@ type Color = {
   _id: string
   name: string
   image: string
-  quantity: number
+  stock: number
 }
 
 type Props = {
@@ -24,7 +24,7 @@ export function ColorSelector({ colors, selectedColor, onSelect }: Props) {
         {colors.map((color) => {
           const active = selectedColor === color.name
 
-          const disabled = color.quantity <= 0
+          const disabled = color.stock <= 0
 
           return (
             <button
@@ -67,7 +67,7 @@ export function ColorSelector({ colors, selectedColor, onSelect }: Props) {
               <span className="text-xs text-neutral-700">{color.name}</span>
 
               <span className="text-[11px] text-neutral-400">
-                {color.quantity} disponíveis
+                {color.stock} disponíveis
               </span>
             </button>
           )

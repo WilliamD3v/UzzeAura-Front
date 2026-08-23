@@ -3,6 +3,7 @@
 import { ShoppingBag } from 'lucide-react'
 
 import { useCart } from '@/components/cart/CartProvider'
+
 import type { Product } from '@/data/products'
 
 type Props = {
@@ -18,14 +19,81 @@ export function AddToCart({ product, size, color, disabled }: Props) {
   function handleAddToCart() {
     if (disabled) return
 
+    /*
+    |--------------------------------------------------------------------------
+    | ENCONTRAR TAMANHO SELECIONADO
+    |--------------------------------------------------------------------------
+    */
+
+    const selectedSize = product.sizes.find((item) => item.size === size)
+
+    if (!selectedSize) {
+      console.error('Tamanho selecionado não encontrado.')
+      return
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | ENCONTRAR COR SELECIONADA
+    |--------------------------------------------------------------------------
+    */
+
+    const selectedColor = selectedSize.colors.find(
+      (item) => item.name === color,
+    )
+
+    if (!selectedColor) {
+      console.error('Cor selecionada não encontrada.')
+      return
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | VALIDAR ESTOQUE
+    |--------------------------------------------------------------------------
+    */
+
+    if (selectedColor.stock <= 0) {
+      console.error('Produto sem estoque.')
+      return
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | DEFINIR IMAGEM
+    |--------------------------------------------------------------------------
+    */
+
+    const imageUrl = selectedColor.image || product.image.url
+
+    /*
+    |--------------------------------------------------------------------------
+    | ADICIONAR AO CARRINHO
+    |--------------------------------------------------------------------------
+    */
+
     addItem({
       productId: product._id,
+
       name: product.name,
-      image: product.image,
+
       price: product.price,
-      size,
-      color,
+
+      image: {
+        url: imageUrl,
+      },
+
+      size: selectedSize.size,
+
+      color: selectedColor.name,
+
+      hex: selectedColor.hex,
+
+      // Quantidade adicionada ao carrinho
       quantity: 1,
+
+      // Estoque disponível dessa variação
+      stock: selectedColor.stock,
     })
   }
 

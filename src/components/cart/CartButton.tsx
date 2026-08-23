@@ -7,7 +7,7 @@ import { useCart } from './CartProvider'
 export function CartButton() {
   const { openCart, items } = useCart()
 
-  const totalItems = items.reduce((acc, item) => acc + item.quantity, 0)
+  const totalItems = items.reduce((acc, item) => acc + item.stock, 0)
 
   return (
     <button

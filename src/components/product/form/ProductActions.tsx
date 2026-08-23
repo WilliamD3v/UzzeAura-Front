@@ -1,109 +1,59 @@
 'use client'
 
 import { Save, X } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   onSubmit: () => void
-
   loading?: boolean
 }
 
 export function ProductActions({ onSubmit, loading = false }: Props) {
+  const router = useRouter()
+
   return (
-    <section
+    <div
       className="
-        flex
-        flex-col
-        gap-4
-
-        rounded-3xl
-
-        border
-
-        border-neutral-200
-
-        bg-white
-
-        p-8
-
-        shadow-sm
-
-        sm:flex-row
-
-        sm:justify-end
+        flex flex-col-reverse gap-3
+        border-t border-neutral-200 pt-6
+        sm:flex-row sm:justify-end
       "
     >
       <button
         type="button"
+        onClick={() => router.back()}
         className="
-          flex
-          h-12
-          items-center
-          justify-center
-          gap-2
-
-          rounded-xl
-
-          border
-
-          border-neutral-300
-
-          px-6
-
-          text-sm
-
-          font-medium
-
-          text-neutral-700
-
+          flex h-11 items-center justify-center gap-2
+          rounded-lg border border-neutral-300
+          bg-white px-5 text-sm font-medium text-neutral-600
           transition
-
-          hover:bg-neutral-50
+          hover:border-neutral-400 hover:bg-neutral-50
+          hover:text-neutral-950
         "
       >
-        <X size={18} />
+        <X size={16} />
         Cancelar
       </button>
 
       <button
         type="button"
-
         disabled={loading}
-
         onClick={onSubmit}
-
         className="
-          flex
-          h-12
-          items-center
-          justify-center
-          gap-2
-
-          rounded-xl
-
-          bg-neutral-900
-
-          px-8
-
-          text-sm
-
-          font-medium
-
-          text-white
-
+          flex h-11 min-w-40 items-center justify-center gap-2
+          rounded-lg border border-neutral-950
+          bg-neutral-950 px-6
+          text-sm font-medium text-[#E1C56E]
           transition
-
-          hover:bg-neutral-800
-
+          hover:bg-black
           disabled:cursor-not-allowed
-
-          disabled:opacity-60
+          disabled:opacity-50
         "
       >
-        <Save size={18} />
+        <Save size={16} />
 
-        {loading ? 'Salvando...' : 'Salvar Produto'}
+        {loading ? 'Salvando...' : 'Salvar produto'}
       </button>
-    </section>
+    </div>
   )
 }

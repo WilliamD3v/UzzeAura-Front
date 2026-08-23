@@ -1,12 +1,11 @@
 'use client'
 
-import { Palette, Plus, Trash2 } from 'lucide-react'
+import { Plus, Trash2 } from 'lucide-react'
 
 import { ProductColor, ProductVariation } from './types'
 
 type Props = {
   variations: ProductVariation[]
-
   onChange: (variations: ProductVariation[]) => void
 }
 
@@ -14,26 +13,20 @@ export function ProductVariants({ variations, onChange }: Props) {
   function addColor(size: string) {
     const newColor: ProductColor = {
       id: crypto.randomUUID(),
-
-      name: 'Nova cor',
-
+      name: '',
       hex: '#000000',
-
       stock: 0,
     }
 
     onChange(
-      variations.map((variation) => {
-        if (variation.size !== size) {
-          return variation
-        }
-
-        return {
-          ...variation,
-
-          colors: [...variation.colors, newColor],
-        }
-      }),
+      variations.map((variation) =>
+        variation.size === size
+          ? {
+              ...variation,
+              colors: [...variation.colors, newColor],
+            }
+          : variation,
+      ),
     )
   }
 
@@ -43,307 +36,189 @@ export function ProductVariants({ variations, onChange }: Props) {
     data: Partial<ProductColor>,
   ) {
     onChange(
-      variations.map((variation) => {
-        if (variation.size !== size) {
-          return variation
-        }
-
-        return {
-          ...variation,
-
-          colors: variation.colors.map((color) => {
-            if (color.id !== colorId) {
-              return color
+      variations.map((variation) =>
+        variation.size === size
+          ? {
+              ...variation,
+              colors: variation.colors.map((color) =>
+                color.id === colorId
+                  ? {
+                      ...color,
+                      ...data,
+                    }
+                  : color,
+              ),
             }
-
-            return {
-              ...color,
-
-              ...data,
-            }
-          }),
-        }
-      }),
+          : variation,
+      ),
     )
   }
 
   function removeColor(size: string, colorId: string) {
     onChange(
-      variations.map((variation) => {
-        if (variation.size !== size) {
-          return variation
-        }
-
-        return {
-          ...variation,
-
-          colors: variation.colors.filter((color) => color.id !== colorId),
-        }
-      }),
+      variations.map((variation) =>
+        variation.size === size
+          ? {
+              ...variation,
+              colors: variation.colors.filter((color) => color.id !== colorId),
+            }
+          : variation,
+      ),
     )
   }
 
   return (
-    <section
-      className="
-        rounded-3xl
-        border
-        border-neutral-200
-        bg-white
-        p-8
-        shadow-sm
-      "
-    >
-      <div className="mb-8">
-        <p
+    <section className="py-10">
+      <label className="mb-5 block text-sm font-medium text-neutral-800">
+        Cores e estoque
+      </label>
+
+      {variations.length === 0 ? (
+        <div
           className="
-            text-sm
-            uppercase
-            tracking-[0.2em]
-            text-[#D4AF37]
+            rounded-lg border border-dashed border-neutral-300
+            bg-[#FAF8F3] px-5 py-8 text-center
+            text-sm text-neutral-400
           "
         >
-          Variações
-        </p>
+          Selecione ao menos um tamanho.
+        </div>
+      ) : (
+        <div className="divide-y divide-neutral-200 border-y border-neutral-200">
+          {variations.map((variation) => (
+            <div key={variation.size} className="py-6">
+              <div className="mb-4 flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <span
+                    className="
+                      flex h-9 min-w-9 items-center justify-center
+                      rounded-md bg-neutral-950 px-2
+                      text-xs font-semibold text-[#D6B85A]
+                    "
+                  >
+                    {variation.size}
+                  </span>
 
-        <h2
-          className="
-            mt-2
-            text-2xl
-            font-semibold
-          "
-        >
-          Cores e Estoque
-        </h2>
+                  <span className="text-sm font-medium text-neutral-800">
+                    {variation.colors.length}{' '}
+                    {variation.colors.length === 1 ? 'cor' : 'cores'}
+                  </span>
+                </div>
 
-        <p
-          className="
-            mt-2
-            text-sm
-            text-neutral-500
-          "
-        >
-          Defina as cores e quantidades disponíveis para cada tamanho.
-        </p>
-      </div>
-
-      <div className="space-y-8">
-        {variations.map((variation) => (
-          <div
-            key={variation.size}
-            className="
-              rounded-2xl
-              border
-              border-neutral-200
-              p-6
-            "
-          >
-            <div
-              className="
-                mb-5
-                flex
-                items-center
-                justify-between
-              "
-            >
-              <div>
-                <h3
+                <button
+                  type="button"
+                  onClick={() => addColor(variation.size)}
                   className="
-                    text-lg
-                    font-semibold
+                    flex items-center gap-2 rounded-lg
+                    border border-neutral-300 bg-white
+                    px-3.5 py-2 text-xs font-medium text-neutral-700
+                    transition
+                    hover:border-neutral-950 hover:text-neutral-950
                   "
                 >
-                  Tamanho {variation.size}
-                </h3>
-
-                <p
-                  className="
-                    text-sm
-                    text-neutral-500
-                  "
-                >
-                  Cores disponíveis
-                </p>
+                  <Plus size={14} />
+                  Adicionar cor
+                </button>
               </div>
 
-              <button
-                type="button"
-
-                onClick={() => addColor(variation.size)}
-
-                className="
-                  flex
-                  items-center
-                  gap-2
-                  rounded-xl
-                  bg-neutral-900
-                  px-4
-                  py-2
-                  text-sm
-                  text-white
-                  transition
-                  hover:bg-neutral-800
-                "
-              >
-                <Plus size={16} />
-                Adicionar cor
-              </button>
-            </div>
-
-            <div className="space-y-4">
-              {variation.colors.map((color) => (
-                <div
-                  key={color.id}
-
-                  className="
-                      grid
-                      gap-4
-                      rounded-2xl
-                      bg-neutral-50
-                      p-4
-                      md:grid-cols-[80px_1fr_120px_50px]
-                    "
-                >
-                  <div
-                    className="
-                        flex
-                        items-center
-                        justify-center
-                      "
-                  >
+              {variation.colors.length > 0 && (
+                <div className="space-y-2">
+                  {variation.colors.map((color) => (
                     <div
+                      key={color.id}
                       className="
-                          flex
-                          h-12
-                          w-12
-                          items-center
-                          justify-center
-                          rounded-xl
-                          border
-                        "
-                      style={{
-                        backgroundColor: color.hex,
-                      }}
+                        grid items-center gap-3
+                        rounded-lg bg-[#FAF8F3] p-3
+                        sm:grid-cols-[44px_minmax(0,1fr)_130px_40px]
+                      "
                     >
-                      <Palette size={18} className="text-white" />
+                      <label
+                        className="
+                          relative h-10 w-10 cursor-pointer
+                          overflow-hidden rounded-lg
+                          border border-neutral-300
+                        "
+                        style={{ backgroundColor: color.hex }}
+                      >
+                        <input
+                          type="color"
+                          value={color.hex}
+                          onChange={(e) =>
+                            updateColor(variation.size, color.id, {
+                              hex: e.target.value,
+                            })
+                          }
+                          className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+                        />
+                      </label>
+
+                      <input
+                        value={color.name}
+                        onChange={(e) =>
+                          updateColor(variation.size, color.id, {
+                            name: e.target.value,
+                          })
+                        }
+                        placeholder="Nome da cor"
+                        className="
+                          h-10 w-full rounded-lg border border-neutral-300
+                          bg-white px-3 text-sm outline-none transition
+                          placeholder:text-neutral-400
+                          focus:border-[#B8963E]
+                          focus:ring-2 focus:ring-[#B8963E]/10
+                        "
+                      />
+
+                      <div className="relative">
+                        <input
+                          type="number"
+                          min={0}
+                          value={color.stock}
+                          onChange={(e) =>
+                            updateColor(variation.size, color.id, {
+                              stock: Number(e.target.value),
+                            })
+                          }
+                          placeholder="Estoque"
+                          className="
+                            h-10 w-full rounded-lg border border-neutral-300
+                            bg-white px-3 pr-9 text-sm outline-none transition
+                            focus:border-[#B8963E]
+                            focus:ring-2 focus:ring-[#B8963E]/10
+                          "
+                        />
+
+                        <span
+                          className="
+                            pointer-events-none absolute right-3 top-1/2
+                            -translate-y-1/2 text-[10px] uppercase
+                            text-neutral-400
+                          "
+                        >
+                          un.
+                        </span>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => removeColor(variation.size, color.id)}
+                        className="
+                          flex h-10 w-10 items-center justify-center
+                          rounded-lg text-neutral-400 transition
+                          hover:bg-red-50 hover:text-red-600
+                        "
+                        aria-label="Remover cor"
+                      >
+                        <Trash2 size={16} />
+                      </button>
                     </div>
-                  </div>
-
-                  <input
-                    value={color.name}
-
-                    onChange={(e) =>
-                      updateColor(
-                        variation.size,
-
-                        color.id,
-
-                        {
-                          name: e.target.value,
-                        },
-                      )
-                    }
-
-                    placeholder="Nome da cor"
-
-                    className="
-                        h-12
-                        rounded-xl
-                        border
-                        border-neutral-300
-                        bg-white
-                        px-4
-                        outline-none
-                        focus:border-[#D4AF37]
-                      "
-                  />
-
-                  <input
-                    type="number"
-
-                    min={0}
-
-                    value={color.stock}
-
-                    onChange={(e) =>
-                      updateColor(
-                        variation.size,
-
-                        color.id,
-
-                        {
-                          stock: Number(e.target.value),
-                        },
-                      )
-                    }
-
-                    placeholder="Estoque"
-
-                    className="
-                        h-12
-                        rounded-xl
-                        border
-                        border-neutral-300
-                        bg-white
-                        px-4
-                        outline-none
-                        focus:border-[#D4AF37]
-                      "
-                  />
-
-                  <button
-                    type="button"
-
-                    onClick={() => removeColor(variation.size, color.id)}
-
-                    className="
-                        flex
-                        h-12
-                        items-center
-                        justify-center
-                        rounded-xl
-                        text-neutral-500
-                        transition
-                        hover:bg-red-50
-                        hover:text-red-600
-                      "
-                  >
-                    <Trash2 size={18} />
-                  </button>
+                  ))}
                 </div>
-              ))}
-
-              {variation.colors.length === 0 && (
-                <p
-                  className="
-                    rounded-xl
-                    bg-neutral-100
-                    p-4
-                    text-sm
-                    text-neutral-500
-                  "
-                >
-                  Nenhuma cor adicionada para este tamanho.
-                </p>
               )}
             </div>
-          </div>
-        ))}
-
-        {variations.length === 0 && (
-          <div
-            className="
-                rounded-xl
-                bg-neutral-100
-                p-5
-                text-sm
-                text-neutral-500
-              "
-          >
-            Selecione os tamanhos disponíveis acima.
-          </div>
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </section>
   )
 }

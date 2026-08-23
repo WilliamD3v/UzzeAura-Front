@@ -10,57 +10,12 @@ type Props = {
 
 export function BasicInformation({ form, setForm }: Props) {
   return (
-    <section
-      className="
-        rounded-3xl
-        border
-        border-neutral-200
-        bg-white
-        p-8
-        shadow-sm
-      "
-    >
-      <div className="mb-8">
-        <p
-          className="
-            text-sm
-            uppercase
-            tracking-[0.2em]
-            text-[#D4AF37]
-          "
-        >
-          Informações
-        </p>
-
-        <h2
-          className="
-            mt-2
-            text-2xl
-            font-semibold
-            text-neutral-900
-          "
-        >
-          Informações Básicas
-        </h2>
-
-        <p className="mt-2 text-sm text-neutral-500">
-          Preencha os dados principais do produto.
-        </p>
-      </div>
-
-      <div className="grid gap-6">
-        {/* Nome */}
-
-        <div>
+    <section className="border-b border-neutral-200 pb-10">
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className="md:col-span-2">
           <label
             htmlFor="name"
-            className="
-              mb-2
-              block
-              text-sm
-              font-medium
-              text-neutral-700
-            "
+            className="mb-2 block text-sm font-medium text-neutral-800"
           >
             Nome do produto
           </label>
@@ -77,83 +32,70 @@ export function BasicInformation({ form, setForm }: Props) {
             }
             placeholder="Ex.: Vestido Aurora"
             className="
-              h-12
-              w-full
-              rounded-xl
-              border
-              border-neutral-300
-              bg-white
-              px-4
-              outline-none
-              transition
-              focus:border-[#D4AF37]
+              h-12 w-full rounded-lg border border-neutral-300
+              bg-[#FFFEFB] px-4 text-sm text-neutral-900
+              outline-none transition
+              placeholder:text-neutral-400
+              hover:border-neutral-400
+              focus:border-[#B8963E]
+              focus:ring-2 focus:ring-[#B8963E]/10
             "
           />
         </div>
-
-        {/* Preço */}
 
         <div>
           <label
             htmlFor="price"
-            className="
-              mb-2
-              block
-              text-sm
-              font-medium
-              text-neutral-700
-            "
+            className="mb-2 block text-sm font-medium text-neutral-800"
           >
             Preço
           </label>
 
-          <input
-            id="price"
-            type="number"
-            min={0}
-            step="0.01"
-            value={form.price || ''}
-            onChange={(e) =>
-              setForm((old) => ({
-                ...old,
-                price: Number(e.target.value),
-              }))
-            }
-            placeholder="0,00"
-            className="
-              h-12
-              w-full
-              rounded-xl
-              border
-              border-neutral-300
-              bg-white
-              px-4
-              outline-none
-              transition
-              focus:border-[#D4AF37]
-            "
-          />
+          <div className="relative">
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-neutral-400">
+              R$
+            </span>
+
+            <input
+              id="price"
+              type="number"
+              min={0}
+              step="0.01"
+              value={form.price || ''}
+              onChange={(e) =>
+                setForm((old) => ({
+                  ...old,
+                  price: Number(e.target.value),
+                }))
+              }
+              placeholder="0,00"
+              className="
+                h-12 w-full rounded-lg border border-neutral-300
+                bg-[#FFFEFB] pl-11 pr-4 text-sm text-neutral-900
+                outline-none transition
+                placeholder:text-neutral-400
+                hover:border-neutral-400
+                focus:border-[#B8963E]
+                focus:ring-2 focus:ring-[#B8963E]/10
+              "
+            />
+          </div>
         </div>
 
-        {/* Descrição */}
-
-        <div>
+        <div className="md:col-span-2">
           <label
             htmlFor="description"
-            className="
-              mb-2
-              block
-              text-sm
-              font-medium
-              text-neutral-700
-            "
+            className="mb-2 block text-sm font-medium text-neutral-800"
           >
-            Descrição (opcional)
+            Descrição
+            <span className="ml-1 font-normal text-neutral-400">
+              (opcional)
+            </span>
           </label>
 
           <textarea
             id="description"
-            rows={6}
+            rows={5}
             value={form.description}
             onChange={(e) =>
               setForm((old) => ({
@@ -163,17 +105,13 @@ export function BasicInformation({ form, setForm }: Props) {
             }
             placeholder="Descreva o produto..."
             className="
-              w-full
-              rounded-xl
-              border
-              border-neutral-300
-              bg-white
-              px-4
-              py-3
-              outline-none
-              transition
-              resize-none
-              focus:border-[#D4AF37]
+              w-full resize-none rounded-lg border border-neutral-300
+              bg-[#FFFEFB] px-4 py-3 text-sm leading-6 text-neutral-900
+              outline-none transition
+              placeholder:text-neutral-400
+              hover:border-neutral-400
+              focus:border-[#B8963E]
+              focus:ring-2 focus:ring-[#B8963E]/10
             "
           />
         </div>

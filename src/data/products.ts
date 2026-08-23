@@ -6,25 +6,30 @@ export type Product = {
   name: string
   description: string
   price: number
+
   image: {
     url: string
     filename: string
     public_id: string
   }
+
   status: {
     destaque: boolean
     estreia: boolean
     post: boolean
   }
+
   sizes: {
     size: string
     colors: {
       _id: string
       name: string
+      hex: string
       image: string
-      quantity: number
+      stock: number
     }[]
   }[]
+
   active: boolean
   createdBy: string
   createdAt: string
